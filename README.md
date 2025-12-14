@@ -1,3 +1,3 @@
-# AFE123x - Class Notes
+# AFE123x - Class/Personal Notes
 
-my notes
+Various notes for me, and school
