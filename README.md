@@ -5,3 +5,5 @@ Various notes for me, and school
 ## notes
 
 [internship notes](./classes/internship/internship.md)
+
+[Linux audio](./classes/linux-audio/linuxaudio.md)
