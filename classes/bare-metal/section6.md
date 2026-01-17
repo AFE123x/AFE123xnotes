@@ -62,23 +62,39 @@ update event = (timer clock) / ((prescaler + 1)(period + 1))
 - Control Register 2 (CR2):
     - enables/disables ADC.
 
-## Timer register - general steps
 
-**initialization**
-- enable clock access to TIMx
-- set prescaler value (via PSC register)
-- set auto reload value (via the ARR register)
-- clear the current count (CNT register)
-- enable timer
+## STM32 Timer Configuration (Register-Level)
 
-**running**
+**Basic time base**
 
-- if you want to perform an action every x seconds, you can poll the UIF bit in the status register.
+* Enable TIMx clock in RCC
+* Set prescaler `PSC` → timer_clk = clk / (PSC+1)
+* Set auto-reload `ARR` → overflow period = (ARR+1)/timer_clk
+* Clear counter `CNT`
+* Enable timer (`CR1.CEN`)
 
-**using output compare**
+**Running / timing events**
 
-- here, you'll also have to enable output compare toggle mode, enable output compare mode, and select the gpio pin to use alternate function (which you'd then select the correct alternate function.)
+* Poll `SR.UIF` for overflow (clear after handling), or use interrupts
 
-**using input capture**
+**Output Compare (event / PWM)**
 
-- you'd do the same steps as "running", but you'd need to enable input compare toggle mode, enable the input compare mode, select the gpio pin to use alternate function, then select the correct alternate function.
+* Set compare value `CCRx`
+* Configure OC mode (`CCMRx.OCxM`)
+* Enable channel output (`CCER.CCxE`)
+* Set GPIO to Alternate Function (TIMx_CHx)
+* Timer triggers action when `CNT == CCRx`
+
+**Input Capture (measure signals)**
+
+* Configure IC mode (`CCMRx.CCxS`)
+* Select edge (rising/falling via `CCER`)
+* Enable capture channel (`CCER.CCxE`)
+* Set GPIO to Alternate Function (TIMx_CHx)
+* On edge, `CNT` is latched into `CCRx`
+
+**Key ideas**
+
+* `PSC + ARR` define timing
+* `UIF` = counter overflow
+* `CCRx` = compare or captured timestamp

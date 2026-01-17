@@ -7,3 +7,4 @@
 [Section 3. Universal Asynchronous Receiver-Transmitter](./section3.md)
 [Section 4. Analog to Digital Conversion](./section4.md)
 [Section 5. The System Tick (SysTick) Timer](./section5.md)
+[Section 6. General Purpose Timers](./section6.md)
