@@ -57,4 +57,28 @@ update event = (timer clock) / ((prescaler + 1)(period + 1))
 - Capture Compare Mode Register (CCMRx)
     - CCMR1 configures the capture/compare functionality for CH1 and CH2.
     - CCMR2 configures the capture/cmompare functionality for CH3 and CH4.
-- Capture Compare Enable Register (CCER)
+- Capture Compare Enable Register (CCER):
+    - used to enable any of the timer channels as input or output compare.
+- Control Register 2 (CR2):
+    - enables/disables ADC.
+
+## Timer register - general steps
+
+**initialization**
+- enable clock access to TIMx
+- set prescaler value (via PSC register)
+- set auto reload value (via the ARR register)
+- clear the current count (CNT register)
+- enable timer
+
+**running**
+
+- if you want to perform an action every x seconds, you can poll the UIF bit in the status register.
+
+**using output compare**
+
+- here, you'll also have to enable output compare toggle mode, enable output compare mode, and select the gpio pin to use alternate function (which you'd then select the correct alternate function.)
+
+**using input capture**
+
+- you'd do the same steps as "running", but you'd need to enable input compare toggle mode, enable the input compare mode, select the gpio pin to use alternate function, then select the correct alternate function.
