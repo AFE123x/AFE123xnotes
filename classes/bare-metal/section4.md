@@ -102,3 +102,4 @@
 - start the conversion (if using single mode)
 - check the status register to see if conversion is completed
 - read value from data register.
+
