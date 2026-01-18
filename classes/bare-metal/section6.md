@@ -76,6 +76,7 @@ update event = (timer clock) / ((prescaler + 1)(period + 1))
 **Running / timing events**
 
 * Poll `SR.UIF` for overflow (clear after handling), or use interrupts
+* clear the UIF bit.
 
 **Output Compare (event / PWM)**
 
