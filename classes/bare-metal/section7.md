@@ -82,23 +82,75 @@
 
 ## Configuring gpio input interrupt
 
-1. disable global interrupt with `__disable_irq();`.
-2. enable clock access for GPIO, and configure pin with `GPIOx_MODER`.
-3. Enable clock access to SYSCFG (using `EXTICR` register)
-4. Select gpio port for exti (using `EXTICR` register).
-5. unmask exti being used (using `IMR` register).
-6. select falling edge trigger (using `FTSR` register).
-7. enable ext13 line in NVIC (using `NVIC_EnableIRQ()` macro), where you'd pass in the specific interrupt you want to handle (`EXT15_10_IRQn` for example).
-8. enable global interrupt.
+```c
+#define GPIOCEN (1U << 2)
+#define GPIOC13 (3U << 26)
+#define EXT13EN (2U << 8)
 
-**writing handler**
+void init_exti_interrupt(void)
+{
+	/* disable irqs */
+	__disable_irq();
 
-- you'd need to name the interrupt handler as:
+	/* enable global clock access for GPIOC */
+	RCC->IOPENR |= GPIOCEN;
+
+	/* enable SYSCFGEN clock */
+	RCC->APBENR2 |= (1U << 0);
+
+	/* configure PC13 as input */
+	GPIOC->MODER &= ~GPIOC13;
+
+	/* connect PC13 to ext13 */
+	EXTI->EXTICR[3] &= ~(0xFFU << 8);  // Clear EXTI13 field
+	EXTI->EXTICR[3] |= EXT13EN;
+
+	/* unmask exti being used */
+	EXTI->IMR1 |= (1U << 13);
+
+	/* select rising edge trigger */
+	EXTI->RTSR1 |= (1U << 13);
+
+	/* enable ext13 line in NVIC */
+	NVIC_EnableIRQ(EXTI4_15_IRQn);
+	/* enable irqs*/
+	__enable_irq();
+}
+```
+- when you start, you need to disable irqs, and enable irqs at the end.
+- First, we need to enable the clock for the GPIO we want to use, and configure it as input.
+- Second, we connect PC13 to the exti line, 13.
+- unmask the exti line being used.
+- select when the interrupt be invoked (rising or falling edge).
+- enable the ext13 in NVIC
+
+
+**handler**
 
 ```c
-void EXT15_10_IRQHandler(void);
+void EXTI4_15_IRQHandler(void) //you need to name it specifically, as this is the function name in the interrupt vector table
+{
+    // Check if EXTI13 triggered the interrupt
+    if(EXTI->RPR1 & (1U << 13))
+    {
+        // Clear the pending bit by writing 1 to it
+        EXTI->RPR1 |= (1U << 13); //we write 1 to it, not zero
+        GPIOA->ODR ^= (1U << 5); //just toggle gpioa5.
+        printf("interrupt invoked\n\r"); //print statement.
+    }
+}
 ```
-- this is because the vector table will store a function called EXT15_10_IRQHandler
-- Since other exti registers could use the same handler, you need to differentiate between them in software.
-    - you can use the pending register to check which exti line device triggered the irq
-- in the handler, you want to clear the pending request flag that's set. This is by setting it to 1.
+
+## configuring USART interrupt
+
+- First, enable USART by using the `CR1` register to enable when to invoke interrupt
+- Second, enable the USART2 interrupt in the NVIC.
+
+## configuring ADC interrupts
+
+- You can do this by configuring the ADC's control register to enable interrupts
+- Enable the ADC interrupt in the NVIC
+
+## Configuring systick and timer interrupt
+
+- Like the other interrupts, enable interrupts in the control register and enable the interrupt in the NVIC
