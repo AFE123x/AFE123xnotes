@@ -5,3 +5,4 @@ Various notes for me, and school
 ## notes
 
 [internship notes](./classes/internship/internship.md)
+[embedded notes](./classes/bare-metal/embedded.md)
