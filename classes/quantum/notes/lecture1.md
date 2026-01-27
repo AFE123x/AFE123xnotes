@@ -78,35 +78,50 @@ $$
 \begin{bmatrix}
 1 \\
 0
-\end{bmatrix} = |0>, \text{ which wi call "ket" 0}
+\end{bmatrix} = \ket{0}, \text{ which we call "ket" 0}
 
 \begin{bmatrix}
 0 \\
 1
-\end{bmatrix} = |1>, \text{ which wi call "ket" 1}
+\end{bmatrix} = \ket{1}, \text{ which we call "ket" 1}
 $$
-
-the $|1>$ is known as derock notation
-
-$|1> = \begin{bmatrix} 1 0\end{bmatrix}$
-$<0| = \begin{bmatrix} 1 & 1\end{bmatrix}$
-
-$<0|0> = \begin{bmatrix} 1 & 1\end{bmatrix}  \begin{bmatrix} 1 \\ 0\end{bmatrix} = 0$, read as bra zero, ket zero.
 
 **is this just the binary abstraction on QC, or just classical computing.**
 
-## Working on bra, ket states
+## derag notation
+the $\ket{1}$ is known as bra ket notation
 
-- $X|0> = \begin{bmatrix} 0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = \begin{bmatrix}0 & 1\end{bmatrix} = | 1 >$
-- $X|1> = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix} 0 \\ 1\end{bmatrix} = \begin{bmatrix}1 \\ 0\end{bmatrix}$
+$\ket{0} = \begin{bmatrix} 1 \\ 0\end{bmatrix}$
+
+$\bra{0} = \begin{bmatrix} 1 & 0 \end{bmatrix}$ 
+
+$\bra{0} \ket{0} = \begin{bmatrix}1 & 0\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = 1$
+
+$\bra{1} \ket{0} = \begin{bmatrix}0 & 1\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = 0$
+
+## NOT gate
+
+lets say we have the following matrix, $X = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}$
+
+$X \ket{0} = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = \begin{bmatrix}0 \\ 1\end{bmatrix} = \ket{1}$
+
+$X \ket{1} = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}0 \\ 1\end{bmatrix} = \begin{bmatrix}1 \\ 0\end{bmatrix} = \ket{0}$
+
 
 ## hadamard gate
 
-- the hadamard gate is the matrix $H = \begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix}$
-
+- the hadamard operator is the matrix $H = \begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix}$
+    - $H \ket{0} = \begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} \begin{bmatrix}1 \\ 0\end{bmatrix} = \begin{bmatrix}\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}\end{bmatrix} = \frac{1}{\sqrt{2}} \ket{0} + \frac{1}{\sqrt{2}} \ket{1}$
+    - $H \ket{0} = \begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} \begin{bmatrix}0 \\ 1\end{bmatrix} = \begin{bmatrix}\frac{1}{\sqrt{2}} \\ \frac{-1}{\sqrt{2}}\end{bmatrix} = \frac{1}{\sqrt{2}} \ket{0} - \frac{1}{\sqrt{2}} \ket{1}$
 
 - This matches the idea of the photon detector thing pretty well. It's probabilistic in nature.
 - We usually pass our value into multiple gates to get a final value.
+
+```
+       +---+
+|0>----| H |--|+>
+       +---+
+```
 
 ## superposition
 
@@ -114,4 +129,31 @@ $<0|0> = \begin{bmatrix} 1 & 1\end{bmatrix}  \begin{bmatrix} 1 \\ 0\end{bmatrix}
 
 - there are other physical phenomena that can be used to represent qubits.
 
-**ask mary for notes**
+## phase shift gate
+
+- represented via $Z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}$
+
+- $Z \ket{0} = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} \begin{bmatrix}1 \\ 0\end{bmatrix} = \begin{bmatrix}1 \\ 0\end{bmatrix} = \ket{0}$
+- $Z \ket{1} = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} \begin{bmatrix}0 \\ 1\end{bmatrix} = \begin{bmatrix}0 \\ -1\end{bmatrix} = - \ket{1}$
+
+## Bloch Sphere
+
+we can represent the pure state of a single qubit with:
+
+- $\ket{\psi} = cos \frac{\theta}{2}\ket{0} + e^{i\phi} sin \frac{\theta}{2} \ket{1}$
+    - $\theta$ is the polar angle
+    - $\phi$ is azimuthal angle
+
+- euler's formula: $e^{i\phi} = cos\phi + isin\phi$
+
+- this can be represented with a circle. pure states are on the surface. mixed are inside.
+
+![alt text](image.png)
+
+- $\ket{0}$ is like the north pole, for example.
+
+### rotation around the bloch sphere
+
+- $R_x (\theta) = cos\frac{\theta}{2} I - isin\frac{\theta}{2} X$
+- $R_y (\theta) = cos\frac{\theta}{2} I - isin\frac{\theta}{2} Y$
+- $R_y (\theta) = cos\frac{\theta}{2} I - isin\frac{\theta}{2} Z$
