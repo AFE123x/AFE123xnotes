@@ -152,6 +152,11 @@ we can represent the pure state of a single qubit with:
 
 - $\ket{0}$ is like the north pole, for example.
 
+- $\ket{+}$ is $H\ket{0}$
+    - this means the angle, $\theta$ will not go over $90\degree$
+    - it will also glide along the X and Y axis.
+- $\ket{-}$ is $H \ket{1}$
+
 ### rotation around the bloch sphere
 
 - $R_x (\theta) = cos\frac{\theta}{2} I - isin\frac{\theta}{2} X$
