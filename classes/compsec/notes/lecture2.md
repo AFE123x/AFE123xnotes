@@ -131,3 +131,31 @@ HLLOEL
 ## Triple DES algorithm
 
 - here, we applied DES three times (3DES)
+    - steps:
+        - encrypt Plain Text with K1.
+        - decript cipher text with K2.
+        - Encrypt cipher text again with K3, then send to user.
+- We don't encrypt three times, the second iteration will decrypt the original cipher text, so you'd end up sending a regular DES to the recipient.
+
+## round key generation
+
+- given a 56 bit cipher key, it'll vary the subkey for 16 rounds to turn the initial plain text into cipher text.
+
+![alt text](image.png)
+
+## three types of P-Boxes
+
+- straight: n bits in -> n bits out
+- expansion: n bits in -> m bits out (m > n)
+- compression: n bits in -> m bits out (m < n)
+
+## why is data loss okay?
+
+- the key schedule
+    - the receiving person has the full key, there's no need for the whole thing. They could compress the key on their end, and use that te decrypt the cipher text.
+- inside the round function
+    - realistically, data isn't being lost, but combined.
+
+## security benefits of data loss
+
+- Because it's compressed, the attacker, can't recover the lost data.
