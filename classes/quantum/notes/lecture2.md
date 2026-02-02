@@ -71,7 +71,7 @@ $\epsilon(\rho) = \sum_{k} E_k \rho E_k ^\dagger = \sum_k E_k\ket{\psi}\bra{\psi
 - the bit flip channel flips the state of qubit with probability of 1 - p. there are two elements:
 
 $$
-E_0 = \sqrt{p}I = \sqrt{p} \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}
+E_0 = \sqrt{p}I = \sqrt{p} \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix} \\
 E_0 = \sqrt{1 - p}I = \sqrt{1 - p} \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}
 $$
 
@@ -111,3 +111,17 @@ $$
 
 - the maximally mixed state:
     - $\rho = \frac{I}{2} \\ = \frac{I + \vec{r} + \vec{\sigma}}{2} \\ \vec{r} = \begin{bmatrix}0 \\ 0 \\ 0\end{bmatrix}$
+
+## Phase flip noise channel
+
+- The phase flip noise chanel.
+
+$E_0 = \sqrt{p} I = \sqrt{p} \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}$
+
+$E_1 = \sqrt{1 - p} Z = \sqrt{p} \begin{bmatrix}1 & 0 \\ 0 & -1 \end{bmatrix}$
+
+- on the bloch sphere, it'll span on the x and y axis
+
+## key i states
+
+$\ket{+1}$ is at one end of the y axis

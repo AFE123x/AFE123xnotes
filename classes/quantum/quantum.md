@@ -4,4 +4,6 @@
 
 ## textbook
 
-[chapter1](./book/chapter1.md)
+[linalg](./book/linalg.md)
+
+[introduction](./book/introduction.md)
