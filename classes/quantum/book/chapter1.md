@@ -210,3 +210,40 @@ $$
 $$
 
 $\ket{A, B} \rightarrow \ket{A, B \oplus A}$
+
+## + and - vectors
+
+- We've seen $\ket{0}$ and $\ket{1}$ thus far
+- Now, we have $\ket{+}$ and $\ket{-}$
+
+- $\ket{+} \equiv \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$
+- $\ket{-} \equiv \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$
+
+## finding $\ket{\psi}$ in $\ket{-}$ and $\ket{+}$
+
+- we know the following:
+    - $\ket{+} \equiv \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$
+    - $\ket{-} \equiv \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$
+
+- lets start with the following:
+
+- $\ket{+} + \ket{-}= \frac{\ket{0} + \ket{1}}{\sqrt{2}} + \frac{\ket{0} - \ket{1}}{\sqrt{2}}$
+    - $= \frac{\ket{0} + \ket{0}}{\sqrt{2}}$, since $\ket{1}$ cancels out.
+    - we can multiply the numerator and denominator by $\sqrt{2}$
+    - $\frac{\sqrt{2}}{\sqrt{2}}\times 2\frac{\ket{0}}{\sqrt{2}}$
+    - numbers cancel out giving us: $\ket{+} + \ket{-} = \sqrt{2}\ket{0}$
+- $\ket{+} - \ket{-}= \frac{\ket{0} + \ket{1}}{\sqrt{2}} - \frac{\ket{0} - \ket{1}}{\sqrt{2}}$
+    - we can do similar math above to give us $\sqrt{2} \ket{1}$
+
+
+- we can plug these into $\ket{\psi}$
+
+$\ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \alpha \frac{\ket{+} + \ket{-}}{\sqrt{2}} + \beta \frac{\ket{+} - \ket{-}}{\sqrt{2}}$
+
+- finally, we'll get $\ket{\psi} = \frac{\alpha + \beta}{\sqrt{2}} \ket{+} + \frac{\alpha - \beta}{\sqrt{2}} \ket{-}$
+
+we can interpret this as the result $\ket{-}$ has probability $\frac{|\alpha - \beta|^2}{2}$ and result $\ket{+}$ has probability $\frac{|\alpha + \beta|^2}{2}$
+
+## quantum circuits
+
+-
