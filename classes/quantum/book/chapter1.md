@@ -246,4 +246,30 @@ we can interpret this as the result $\ket{-}$ has probability $\frac{|\alpha - \
 
 ## quantum circuits
 
--
+- quantum circuits provide a formal language for representing changes to quantum states using a model analogous to classical electrical circuits.
+
+### wires
+
+- a quantum computer is build from circuits containing:
+    - wires: carrying information.
+        - can present **passage of time** or **movement of a physical particle through space**.
+    - elementary quantum gates: manipulates information
+
+### input stets
+
+- We usually assume the input to a circuit is a computational basis state.
+    - typically, the state where all qubits are $\ket{0}$
+    
+## nature of circuits
+
+- Circuits are usually acyclic, meaning no loops or feedback.
+- wires cannot be joined together
+- you canot clone qubits
+
+## toffoli gate
+
+- This is a reversible gate
+- it has three input and output bits:
+    - for input: 2 are control bits, 1 is target, and the target's flipped only if a and b are one.
+
+- this gate ensures classical computation can work on quantum computers.
