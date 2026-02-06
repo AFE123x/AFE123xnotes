@@ -161,3 +161,64 @@ steps:
 
 ## PKI
 - PKI: Public Key Infrastructure
+
+## what's a hash function
+
+- A hash function takes an input of arbitrary length, and produces fixed length output
+    - `h = H(M)`
+- examples include SHA-256
+
+## hash properties
+
+- deterministic: same input -> same output
+- fast to compute: efficient calculation
+- pre image resistance: can't reverse (one-way)
+    - for example, given a hash value, you cannot deduct what the hash is.
+- the hash should always provide unique results (no collisions).
+    - and you should always get the same result given the same hash
+
+## hash function - applications
+
+- data integrity: file verification, check integrity of file.
+- password storage: store as a hash, not a plaintext
+- digital signatures: as a signed hash, not entire doc
+- blockchain: uses double SHA-256, each block contains hash of previous block.
+
+## hash algorithms
+
+- md5, sha-1, sha-2, sha-3
+
+## Hash algorithms: MD5 and SHA-1
+
+- provides 128 bit output for MD5, 160 bit output for SHA-1
+- these are deprecated
+
+## Hash Algorithms: SHA-2 family
+
+- These are secure, much more bits.
+
+## issues with hash's 
+
+- it helps with data integrity, but not authentication.
+- Anyone can intercept a message, and rehash another message.
+    - the recipient is oblivious to who sent the message
+## MACs
+
+- Message Authentication Codecs
+
+- MAC is a checksum, which uses a secret key.
+    - it detects accidential vs. intentional modification.
+
+$MAC = MAC(K,M) ;; K = $ secret key (shared between alice and bob) M = message, MAC = authentication tag
+
+
+## HMAC
+
+- this is Hash based MAC
+- Here, you use a cryptographic hash function (like SHA-256), and a secret key to produce a MAC
+
+$HMAC(K, M) = H((K \oplus opad) || H((K \oplus ipad) || M))$
+
+
+## digital signatures
+
