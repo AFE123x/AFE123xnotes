@@ -1,164 +1,150 @@
-# lecture 2: introduction
+# Lecture 1 - Introduction to quantum computing
 
-- in QC, we have various aspects of QC:
-    - states
-    - gates
-    - protocols
-    - algortihms
-    - repetition
+## four principles needed to understand quantum computing
 
-## QECC
-- Quantum Error Correction Code
-- This is the main focus in 2026.
+1. state space: how are quantum states described
+2. composite systems: how are the quantum states composed?
+3. evolution: how do qubit states evolve?
+4. quantum measurements: once you allow your qubit to interract with the environment, what would the qubit look like?
 
-## Quantum mechanics - postulates
+- 1 to 3 describe closed quantum systems.
+    - the particle states are closed off from the environment.
+- 4 describes open quantum systems.
+    - here, the quantum system is exposed to the 
 
-- Fourset of principles to build an understanding of quantum computing:
-    - state space
-    - composite system
-    - evolution
-    - quantum measurement.
+## what is a quantum state, qubit?
 
+- when looking at qunatum mechanics, we assume the state of a system is a continuous state space: $\int_{-\infty}^{\infty} \psi(x) \ket{x} dx$
+- one simplification is we discretize the state space: $\sum_{i = 0}^{\infty} \psi(x_i)\ket{x_i}$
+- next, we need to further simplify this to assume a descrete binary state space: $\sum_{i = 0}^1 \psi(x_i)\ket{x_i}$
+    - now this state is a sum of $\psi(0)\ket{0} + \psi(1)\ket{1}$
+- this is a qubit
 
-```
-    - state space. --------------------
-    - composite system                | closed Quantum Systems
-    - evolution  ----------------------
-    - quantum measurement (non linear and describes open quantum system.)
-````
+## qubit - binary abstraction
 
-- state space - how are quantum states described.
-- composite systems: how do we put the states together.
-- evolution: how do qubits evolve.
-- quantum measurement: once you let the qubit interract with the interaction, what does the qubit state look like?
-    - We want to get information out the quantum state.
+- qubits can have one of two states:
+    - $\begin{bmatrix}1 \\ 0\end{bmatrix}$, or $\ket{0}$
+    - $\begin{bmatrix}0 \\ 1\end{bmatrix}$, or $\ket{1}$
 
-## QIP vs. QM
+## Dirac notation
 
-- QIP = Quantum Information Processing
-    - treat as discrete state, and time
-- QM = Quantum Mechanics:
-    - continuous time and continuous state.
+- there are two parts, bra and ket notation
 
-## state of a single qubit
+- $\ket{0} = \begin{bmatrix}1 \\ 0\end{bmatrix}$
+- $\bra{0} = (\ket{0}^t)^* = \ket{0}^\dagger = \begin{bmatrix}1 & 0\end{bmatrix}$
+    - bra 0 equals the conjugate transpose of ket 0
 
-```
-What is the qubit state represented by the geographical location of Old Queens?
-```
-- what exactly does this question mean?
+## conjugate
 
-## Transition from physics to discrete
+- given $z = a + ib$
+- $z^* = a - ib$
 
+## not gate
 
-- first we need to transition from a continuous state space to a discrete state space
+- we can represent the not gate using the NOT operator X
 
-- before, we assumed a continuous state space:
-    - $| \psi > \int^\infty _{-\infty} \Psi (x) | x> dx$, there's no limit.
-- after, we assume a discrete state space:
-    - $|\psi > = \sum ^\infty _{i = 0} \pi (x_i)|x_i>$
-
-- here, we're transitioning from the continuous state space to a discrete state space.
-
-**Next, we need to go from a descrete state space to a discrete binarized state space**
-
-- we first assume a discrete state space
-    - $| \psi > = \sum^\infty _{i = 0} \psi (x_i) | x_i >$
-- we can then transition nto the discrete binary state space:
-    - $|\psi > = \sum^1 _ {i = 0} \psi (x_i) | x_i >$,
-        - which says we assume combinations of two states.
-
-## binary abstraction
-
-- we have two states in quantum computer
-
-- there's high and low voltage
-
-- we have two main states:
 $$
-\begin{bmatrix}
-1 \\
-0
-\end{bmatrix} = \ket{0}, \text{ which we call "ket" 0}
-
-\begin{bmatrix}
-0 \\
-1
-\end{bmatrix} = \ket{1}, \text{ which we call "ket" 1}
+X = \begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
 $$
 
-**is this just the binary abstraction on QC, or just classical computing.**
+$$
+X\ket{0} = \begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix} \begin{bmatrix}1 \\ 0\end{bmatrix} = \ket{1}
+$$
 
-## derag notation
-the $\ket{1}$ is known as bra ket notation
-
-$\ket{0} = \begin{bmatrix} 1 \\ 0\end{bmatrix}$
-
-$\bra{0} = \begin{bmatrix} 1 & 0 \end{bmatrix}$ 
-
-$\bra{0} \ket{0} = \begin{bmatrix}1 & 0\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = 1$
-
-$\bra{1} \ket{0} = \begin{bmatrix}0 & 1\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = 0$
-
-## NOT gate
-
-lets say we have the following matrix, $X = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}$
-
-$X \ket{0} = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}1 \\ 0\end{bmatrix} = \begin{bmatrix}0 \\ 1\end{bmatrix} = \ket{1}$
-
-$X \ket{1} = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}0 \\ 1\end{bmatrix} = \begin{bmatrix}1 \\ 0\end{bmatrix} = \ket{0}$
-
+$$
+X\ket{1} = \ket{0}
+$$
 
 ## hadamard gate
 
-- the hadamard operator is the matrix $H = \begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix}$
-    - $H \ket{0} = \begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} \begin{bmatrix}1 \\ 0\end{bmatrix} = \begin{bmatrix}\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}\end{bmatrix} = \frac{1}{\sqrt{2}} \ket{0} + \frac{1}{\sqrt{2}} \ket{1}$
-    - $H \ket{0} = \begin{bmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}}\end{bmatrix} \begin{bmatrix}0 \\ 1\end{bmatrix} = \begin{bmatrix}\frac{1}{\sqrt{2}} \\ \frac{-1}{\sqrt{2}}\end{bmatrix} = \frac{1}{\sqrt{2}} \ket{0} - \frac{1}{\sqrt{2}} \ket{1}$
+- the hadamard operator is the following matrix:
 
-- This matches the idea of the photon detector thing pretty well. It's probabilistic in nature.
-- We usually pass our value into multiple gates to get a final value.
+$$
+H = \begin{bmatrix}
+\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+\end{bmatrix}
+$$
 
-```
-       +---+
-|0>----| H |--|+>
-       +---+
-```
+$$
+H\ket{0} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1} = \ket{+}
+$$
 
-## superposition
+$$
+H\ket{1} = \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1} = \ket{-}
+$$
 
-- in a single qubit state, you have matrices n stuff.
+- unlike the not gate, there's a probability the output state could either be $\ket{0}$ or $\ket{1}$
 
-- there are other physical phenomena that can be used to represent qubits.
+- we can nickname the output of the hadamard with $\ket{+}$ or $\ket{-}$
+
+## passing ket + or - through hadamard gate.
+
+- if you pass $\ket{+}$ or $\ket{-}$ into a hadamard gate, it'll remove the probability
+
+$$
+H\ket{+} = \ket{0}
+$$
+
+$$
+H\ket{-} = \ket{1}
+$$
+
+## quantum superposition, normalized condition
+
+- As we've seen, gates will output a probability of being in $\ket{0}$ or $\ket{1}$
+    - $\alpha\ket{0} + \beta \ket{1} = \begin{bmatrix}\alpha \\ \beta\end{bmatrix}$
+
+- we state that the probabilities are normalize if $|\alpha|^2 + |\beta|^2 = 1$
+
+## unitary matrix
+
+- a matrix is unitary only if $U^\dagger U = I$
 
 ## phase shift gate
 
-- represented via $Z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}$
+- this is the pauli Z gate
 
-- $Z \ket{0} = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} \begin{bmatrix}1 \\ 0\end{bmatrix} = \begin{bmatrix}1 \\ 0\end{bmatrix} = \ket{0}$
-- $Z \ket{1} = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix} \begin{bmatrix}0 \\ 1\end{bmatrix} = \begin{bmatrix}0 \\ -1\end{bmatrix} = - \ket{1}$
+$$
+Z = \begin{bmatrix}
+1 & 0 \\
+0 & -1
+\end{bmatrix}
+$$
 
-## Bloch Sphere
+$Z \ket{0} = \ket{0}$
 
-we can represent the pure state of a single qubit with:
+$Z \ket{1} = -\ket{1}$
 
-- $\ket{\psi} = cos \frac{\theta}{2}\ket{0} + e^{i\phi} sin \frac{\theta}{2} \ket{1}$
-    - $\theta$ is the polar angle
-    - $\phi$ is azimuthal angle
+## bloch sphere
 
-- euler's formula: $e^{i\phi} = cos\phi + isin\phi$
+- one way to understand the state of a qubit, is it has two parameters:
+    - distribution of which basis state it's in, or if it's in the superposition of the two
+    - the phase shift
 
-- this can be represented with a circle. pure states are on the surface. mixed are inside.
+$\ket{\psi} = \cos\frac{\theta}{2}\ket{0} + e^{i\phi} \sin \frac{\theta}{2}\ket{1}$, where $e^{i\phi} = \cos \phi + i\sin \phi$
+
+- where $\theta$ is how much $\ket{1}$ there is.
+- and $\phi$ determines the phase shift between the ket 0 and ket one bases
+
+
+### drawing sphere with angles
+
+- we can use these two angles to then draw the bloch sphere.
 
 ![alt text](image.png)
 
-- $\ket{0}$ is like the north pole, for example.
+- the middle means half probability of $\ket{0}$ and $\ket{1}$, hence why $\ket{+}$ and $\ket{-}$ is on the x axis.
+    - Also, there's no phase
 
-- $\ket{+}$ is $H\ket{0}$
-    - this means the angle, $\theta$ will not go over $90\degree$
-    - it will also glide along the X and Y axis.
-- $\ket{-}$ is $H \ket{1}$
+## rotations around bloch sphere
 
-### rotation around the bloch sphere
-
-- $R_x (\theta) = cos\frac{\theta}{2} I - isin\frac{\theta}{2} X$
-- $R_y (\theta) = cos\frac{\theta}{2} I - isin\frac{\theta}{2} Y$
-- $R_y (\theta) = cos\frac{\theta}{2} I - isin\frac{\theta}{2} Z$
+- $R_x(\theta) = \cos \frac{\theta}{2} I - i \sin \frac{\theta}{2} X$
+- $R_y(\theta) = \cos \frac{\theta}{2} I - i \sin \frac{\theta}{2} Y$
+- $R_z(\theta) = \cos \frac{\theta}{2} I - i \sin \frac{\theta}{2} Z$
