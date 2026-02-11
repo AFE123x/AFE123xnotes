@@ -1,127 +1,145 @@
-# Lecture 2
+# lecture 2
 
-## things to know about qubit
+## qubit - type of states
 
-- Pure states: states that are represented by surface of bloch sphere.
-    - aka, idealized states for qubits
-    - on the surface, it has two vectors, similar to longitude and latitude
-- noisy states: these are less than ideal states, needs to correctly 
-    - we use stabilizer states to bring the noisy states to pure states.
+- pure states: on the bloch sphere surface
+- noisy states: not on the bloch sphere
 
-## pauli matrix
+## pauli matrices
 
-- The pauli matrix has four vectors:
-    - $I = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}$
-    - $X = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}$
-    - $Y = \begin{bmatrix}0 & -1 \\ i & 0\end{bmatrix}$
-    - $Z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}$
+- These are the foundational matrices:
 
-- these are three complex matrices that are traceless, hermitian, involutory and unitary.
+$$
+I = \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}
+$$
+$$
+X = \begin{bmatrix}0 & 1 \\ 0 & 1\end{bmatrix}
+$$
+$$
+Y = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}
+$$
+$$
+Z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}
+$$
+
+- these are the matrices that make the rotations about the bloch sphere work.
+- these are the bases of all unitary matrices.
+    - $U = \alpha X + \gamma Y + \delta Z$
 
 ## hardware noise
 
-- quantum bits can be unreliable due to:
-    - decoherence error
-        - chemistry stuff: ion will get excited, but will get tired.
-        - basically, the qubit will become incoherent.
-    - gate error
-        - imprecise control of single qubit, two qubit gates.
-        - the 
-    - measurement error:
-        - the way to extract data from the qubit is incorrect.
+- Some errors aren't the programmer's fault, but it could be the hardware's fault.
+- this could be due to decoherence, gate or measurement errors.
+- there's posilibities that bit flips can occur.
+- quantum computer hardware is unreliable, and is prone to noise.
+    - when the light beams at the ion, it gets excited. Overtime, the excited state will decay, and could be read as the ground state. 
+        - this is random, and there exists a probability.
 
 ## types of noise
 
-- bit flip noise: when 0 flips to 1
-- phose flip noise
-- combination of the prior 2.
-- types of noise where the balance between $\ket{1}$ and $\ket{0}$ **ask**
+- bit flip noise
+    - $\ket{1}$ decays towards $\ket{0}$
+- phase flip noise
+- combination of the two
+## representing bit flips
 
-## modeling bit noise mathmatically
+- $\ket{0} \rightarrow BitFlip(0.64)$
+    - where $P(\ket{0}) = 0.64$
+    - and $P(\ket{1}) = 0.36$, which means it got bit flipped from ket 0 to ket 1.
 
-$\ket{0} \rightarrow BitFlip(0.64) \rightarrow \begin{cases} P(\ket{0}) = 0.64 \\ P(\ket{1}) = 0.36\end{cases}$
-
-- we can represent this probability as a **density matrix**
-
-$$
-0.64\ket{0}\bra{0} + 0.36 \ket{1} \ket{1}
-$$
-
-- two variables of uncertainty:
-    - noise: there's a distribution.
-    - quantum uncertainty: the qstate can be both 0 and 1.
-
-- $0.64|\ket{+}\bra{+}| + 0.36|\ket{-}\bra{-}|$
-    - this is flipped with a phase flip
-
-## density matrices
-
-$\rho = \sum_{j} P_j \ket{\psi_j} \bra{\psi_j} = 1$
-
-
-## quantum channel
-
-- what are channels?
-    - these are links between two things, we're transmitting qubit data
-
-$\epsilon(\rho) = \sum_{k} E_k \rho E_k ^\dagger = \sum_k E_k\ket{\psi}\bra{\psi}E_k ^\dagger$, this is Kraus Operators.
-
-## bit flip noise channel
-
-- the bit flip channel flips the state of qubit with probability of 1 - p. there are two elements:
+- we can represent them with a density matrix
 
 $$
-E_0 = \sqrt{p}I = \sqrt{p} \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix} \\
-E_0 = \sqrt{1 - p}I = \sqrt{1 - p} \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}
+0.64\ket{0}\bra{0} + 0.36\ket{1}\bra{1}
 $$
 
-### example
+$$
+= 0.64 \begin{bmatrix}1 \\ 0\end{bmatrix} \begin{bmatrix}1 & 0\end{bmatrix}
+
++
+
+0.36  \begin{bmatrix}0 \\ 1\end{bmatrix} \begin{bmatrix}0 & 1\end{bmatrix}
+$$
 
 $$
-\epsilon_{bitflip}(\begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix}) = \sum_{k} E_k \begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix} E_k^\dagger \\
-
-0.8 \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}\begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix} 0.8 \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix} + 0.6 \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix}0.6\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} = \begin{bmatrix}0.64 & 0 \\ 0 & 0.36\end{bmatrix}
+= 0.64 \begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix} + 0.36 \begin{bmatrix}0 & 0 \\ 0 & 1\end{bmatrix}
 $$
+
+$$
+= \begin{bmatrix}0.64 & 0 \\ 0 & 0.36\end{bmatrix}
+$$
+
+## two types of uncertainty
+
+- phase noise.
+- idea quantum state could be both ket 0 and ket 1.
+
+## density matrix
+
+$\rho = \sum_j P_k \ket{\psi}\bra{\psi}$, where the probabilities should add up to one.
+
+## quantum channels
+
+- these are functions that take in a density matrix, and output another density matrix
+
+
+## krause representation
+
+$$
+\epsilon (\rho) = \sum_k E_k \rho E_k^\dagger
+$$
+
+- this provides us a way to see how the environment affects the system.
 
 ## bloch vector
 
-$$
-\rho = \frac{I + \vec{r} \cdot \vec{\sigma}}{2}
-$$
+- we may want to figure out where the quantum state is on the bloch sphere.
 
-## depolarizing noise
+- to get this, we can use $\rho = \frac{I + \vec{r} + \vec{\sigma}}{2}$
 
-$$
-\triangle_\lambda (\rho) = \sum_{i = 0}^3 K-i p k_i ^\dagger\\
+### example
 
-K_0 = \sqrt{1 - \frac{3}{4}\lambda} I \\
-K_1 = \sqrt{\frac{\lambda}{4}} X
-K_2 = \sqrt{\frac{\lambda}{4}} Y
-K_3 = \sqrt{\frac{\lambda}{4}} Z \\
-\text{what should } \lambda \text{ be?}
+given $\rho = \begin{bmatrix}0.64 & 0 \\ 0 & 0.36\end{bmatrix}$
+
+- we can multiply both sides by 2:
 
 $$
+2\rho = I + \vec{r} + \vec{\sigma}
+$$
 
-- it models the destrucction of information.
-- it's not unbalanced, biased or correlated.
-    - aka, it the's simplest model of noise, with few free noise.
+$$
+2 \rho = \begin{bmatrix}1.28 & 0 \\ 0 & 0.72\end{bmatrix}
+$$
 
+from here, we can subtract the identity matrix from both sides
 
-**what should lambda be?**
+$$
+2\rho - I = I + \vec{r} + \vec{\sigma} - I
+$$
 
-- the maximally mixed state:
-    - $\rho = \frac{I}{2} \\ = \frac{I + \vec{r} + \vec{\sigma}}{2} \\ \vec{r} = \begin{bmatrix}0 \\ 0 \\ 0\end{bmatrix}$
+$$
+2 \rho - I = \begin{bmatrix}1.28 & 0 \\ 0 & 0.72\end{bmatrix} - \begin{bmatrix}1 & 0 \\ 0 & 1\end{bmatrix}
+=
+\begin{bmatrix}1.28 - 1 & 0 \\ 0 & 0.72 - 1\end{bmatrix}
 
-## Phase flip noise channel
+=
 
-- The phase flip noise chanel.
+\begin{bmatrix}0.28 & 0 \\ 0 & -0.28\end{bmatrix}
 
-$E_0 = \sqrt{p} I = \sqrt{p} \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}$
+$$
 
-$E_1 = \sqrt{1 - p} Z = \sqrt{p} \begin{bmatrix}1 & 0 \\ 0 & -1 \end{bmatrix}$
+we can see the matrix looks similar to Z, so we can further simplify this:
 
-- on the bloch sphere, it'll span on the x and y axis
+$$
+\vec{r} \cdot \vec{\sigma}.= 0.28\sigma_z
+$$
 
-## key i states
+so the block vector is:
 
-$\ket{+1}$ is at one end of the y axis
+$$
+\begin{bmatrix}
+r_x = 0 \\
+r_y = 0 \\
+r_z = 0.28
+\end{bmatrix}
+$$
