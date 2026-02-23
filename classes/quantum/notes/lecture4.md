@@ -20,3 +20,11 @@ $[z | x | r]$
     - $\ket{0}$ is stabilized by Z.
     - $\ket{0}$ is not stabilized by X.
     - $\ket{0}$'s phase is 0
+
+## dense coding
+
+- entanglement protocol, relying on having bell states
+
+$$
+\ket{00}
+$$

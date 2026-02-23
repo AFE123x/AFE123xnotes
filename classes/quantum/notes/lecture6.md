@@ -34,3 +34,24 @@ $$
 U(\ket{\psi}\ket{0}) = \ket{\psi}\ket{\psi} \\
 U(\ket{\phi}\ket{0}) = \ket{\phi}\ket{\phi}
 $$
+
+
+**doesn't really matter**
+
+## superdense coding
+
+- here, we can transmit 2 bits of classical information by sending 1 qubit.
+- alice and bob share a bell pair, such as $\ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$
+
+## bell states
+
+- there are four maximally entangled bell states:
+
+$$
+\ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) \\
+\ket{\Phi^-} = \frac{1}{\sqrt{2}}(\ket{00} - \ket{11}) \\
+\ket{\Psi^-} = \frac{1}{\sqrt{2}}(\ket{01} + \ket{10}) \\
+\ket{\Psi^-} = \frac{1}{\sqrt{2}}(\ket{01} - \ket{10})
+$$
+
+- alice could then perform I, X, Z or ZX on the qubit, then send it to bob.
