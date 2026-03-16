@@ -148,3 +148,7 @@ $\ket{\psi} = \cos\frac{\theta}{2}\ket{0} + e^{i\phi} \sin \frac{\theta}{2}\ket{
 - $R_x(\theta) = \cos \frac{\theta}{2} I - i \sin \frac{\theta}{2} X$
 - $R_y(\theta) = \cos \frac{\theta}{2} I - i \sin \frac{\theta}{2} Y$
 - $R_z(\theta) = \cos \frac{\theta}{2} I - i \sin \frac{\theta}{2} Z$
+
+## mechanics of measurement
+
+- In the stabilizer view, measure is classified by the
