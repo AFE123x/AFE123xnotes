@@ -1,5 +1,6 @@
 anki/
 classes/bare-metal/datasheet/
+classes/.DS_Store
 # STM32CubeIDE specific files
 
 # Project-specific settings. Ignore it if developers have different preferences.
